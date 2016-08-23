@@ -200,6 +200,8 @@ cfg_if! {
     } else if #[cfg(any(all(target_env = "musl", not(target_arch = "mips"))))] {
         #[link(name = "c", kind = "static")]
         extern {}
+    } else if #[cfg(all(target_env = "musl", target_arch = "mips"))] {
+        // don't link to libc etc. automatically in mips-*-*-musl.
     } else if #[cfg(target_os = "emscripten")] {
         #[link(name = "c")]
         extern {}
